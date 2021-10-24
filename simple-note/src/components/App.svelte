@@ -18,7 +18,7 @@
 <main>
 	<ul>
 		{#each todos as todo}
-			<li>{todos}</li>
+			<li>{todo}</li>
 		{/each}
 	</ul>
 
