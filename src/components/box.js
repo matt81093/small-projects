@@ -1,6 +1,6 @@
 //import { LitElement, html } from '@polymer/lit-element'
 import { LitElement, html } from 'lit'
-import * as THREE from 'three/build/three.module'
+import * as THREE from 'three'
 
   class BoxTest extends LitElement {
     constructor () {
@@ -19,7 +19,7 @@ import * as THREE from 'three/build/three.module'
       var renderer = new THREE.WebGLRenderer({canvas: canvas})
       renderer.setSize(300, 300)
       this.renderer = renderer
-//
+
       ;(function animate () {
         requestAnimationFrame(animate)
         cube.rotation.x += 0.01
