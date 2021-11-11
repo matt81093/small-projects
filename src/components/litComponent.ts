@@ -19,7 +19,8 @@ class Background extends LitElement {
         <canvas id="bg"></canvas>
         `;
     }
-}
+} //eh
+
 
 customElements.define(tagName, Background);
 

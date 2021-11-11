@@ -1,6 +1,7 @@
 ---
 // import '../components/fancyBackground.js';
-import '../components/box.js';
+// import '../components/box.js';
+import Component from '../components/component.astro'
 ---
 <html lang="en">
 
@@ -16,7 +17,8 @@ import '../components/box.js';
 	<h1>Welcome to <a href="https://astro.build/">Astro</a></h1>
 	<main>
 		<!-- <lit-background client:idle="lit"/> -->
-		<box-test client:only="lit-html"></box-test>
+		<!-- <box-test client:only="lit-html"></box-test> -->
+		<Component client:idle/>
 	</main>
 </body>
 

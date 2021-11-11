@@ -1,0 +1,22 @@
+env:
+    browser: true
+    es2021: true
+extends:
+    standard
+parser:
+    "@typescript-eslint/parser"
+parserOptions:
+    ecmaVersion: 12
+    sourceType: module
+plugins:
+  - "@typescript-eslint"
+rules:
+    no-tabs:
+        - off
+        - allowIndentationTabs: true
+    indent:
+        - error
+        - tab
+    # Override default settings
+    # eqeqeq: warn
+    # strict: off
