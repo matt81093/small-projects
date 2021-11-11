@@ -1,5 +1,22 @@
 {
+  "name": "@example/minimal",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
   "dependencies": {
-    "@astrojs/renderer-svelte": "^0.1.2"
+    "@astrojs/renderer-lit": "^0.1.2",
+    "@astrojs/renderer-svelte": "^0.1.2",
+    "eslint": "^8.2.0",
+    "lit": "^2.0.2",
+    "three": "^0.134.0"
+  },
+  "devDependencies": {
+    "astro": "^0.20.12",
+    "svelte": "^3.44.1"
   }
 }

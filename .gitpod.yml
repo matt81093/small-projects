@@ -1,0 +1,11 @@
+tasks:
+  - init: npm install
+    command: |
+      npm run dev
+ports:
+  - port: 5000
+    onOpen: ignore
+vscode:
+  extensions:
+    - svelte.svelte-vscode
+    - snowpackjs.astro

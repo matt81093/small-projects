@@ -1,0 +1,23 @@
+---
+// import '../components/fancyBackground.js';
+import '../components/box.js';
+---
+<html lang="en">
+
+<head>
+	<meta charset="utf-8" />
+	<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+	<meta name="viewport" content="width=device-width" />
+	<title>Matthew Kelley's Portfolio</title>
+	<!-- <script defer src='../components/threeComponent.js'/> -->
+</head>
+
+<body>
+	<h1>Welcome to <a href="https://astro.build/">Astro</a></h1>
+	<main>
+		<!-- <lit-background client:idle="lit"/> -->
+		<box-test client:only="lit-html"></box-test>
+	</main>
+</body>
+
+</html>
