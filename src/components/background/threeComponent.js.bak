@@ -1,0 +1,96 @@
+// This will work in astro@next and can @astrojs/renderer-name@next
+
+import * as THREE from "three";
+
+let scene, camera, renderer
+let torus
+
+const initScene = () => {
+    return scene = new THREE.Scene()
+}
+
+const initCamera = () => {
+    return camera = new THREE.PerspectiveCamera(
+        75,
+        window.innerWidth / window.innerHeight,
+        0.1,
+        1000
+        );
+}
+
+const setCamera = () => {
+    return camera.position.setZ(30)
+}
+
+const initRenderer = (canvas) => {
+    return renderer = new THREE.WebGL1Renderer({
+        antialias: true,
+        canvas: canvas
+        // canvas: document.querySelector("#bg"),
+        // canvas: document.getElementById("#bg")
+    });
+}
+
+const setRenderer = (renderer) => {
+    renderer.setPixelRatio(window.devicePixelRatio);
+    renderer.setSize(window.innerWidth, window.innerHeight);
+}
+
+const createTorus = () => {
+    const geometry = new THREE.TorusGeometry(10, 3, 16, 100);
+    const material = new THREE.MeshBasicMaterial({
+        color: 0xff6347,
+        wireframe: true,
+    });
+    return torus = new THREE.Mesh(geometry, material);
+} // This would be better with geometry and material as parameters
+
+const addToScene = (scene, object) => {
+    scene.add(object);
+}
+
+const getCanvas = () => {
+    return document.getElementById('#bg')
+    // this.shadowRoot.getElementById('#bg')
+}
+
+const animate = (renderer, scene, camera, torus) => {
+    requestAnimationFrame(animate);
+
+    torus.rotation.x += 0.01;
+    torus.rotation.y += 0.005;
+    torus.rotation.z += 0.01;
+
+    renderer.render(scene, camera); 
+}
+
+const resize = (renderer, camera) => {
+    renderer.setSize(window.innerWidth, window.innerHeight)
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+}
+
+const setUpScene = () => {
+    let scene = initScene()
+    let camera = initCamera()
+    setCamera(camera)
+    let torus = createTorus()
+    addToScene(scene, torus)
+    // let canvas = getCanvas()
+    // let renderer = initRenderer(canvas)
+    // setRenderer(renderer)
+    // animate(renderer, scene, camera, torus)
+}
+
+export const createScene = (bg) => {
+    let renderer = initRenderer(bg)
+    let camera = initCamera()
+    let scene = initScene()
+    let torus = createTorus()
+    setRenderer(renderer)
+    resize(renderer, camera)
+    animate(renderer, scene, camera, torus)
+}
+
+setUpScene()
+window.addEventListener('resize', resize)

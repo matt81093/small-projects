@@ -3,11 +3,11 @@ import * as THREE from "three";
 
 export const tagName = "lit-background";
 
-class Background extends LitElement {
+window.onload = class Background extends LitElement {
     constructor() {
         super()
-        this.init()
-        this.animate()
+        // window.onload = this.init()
+        // window.onload = this.animate()
         // let canvas = this.shadowRoot.getElementById('canvas')
         // this.canvas = canvas
     }
@@ -49,11 +49,18 @@ class Background extends LitElement {
         scene.add(torus)
 
         // Setup renderer
-        // const canvas = document.createElement('canvas')
-        const renderer = new THREE.WebGLRenderer({
-            canvas: document.createElement('canvas')
-            //    canvas: canvas // type: reference to object
-            })
+        /* if ( document && document.readyState === "interactive") {
+            const canvas = document.createElement('canvas')
+            this.canvas = canvas
+        } */
+        if ( document ) {
+            const renderer = new THREE.WebGLRenderer() //{
+        } else { console.log("Why is there no DOM?" )}
+            /* canvas: document.createElement('canvas')
+            // canvas: this.canvas // type: reference to object
+            // We don't want it to build the element, we can it to access it afterwards
+            // }) */
+        
         renderer.setPixelRatio(window.devicePixelRatio)
         renderer.setSize(window.innerWidth, window.innerHeight)
         this.renderer = renderer
@@ -71,18 +78,18 @@ class Background extends LitElement {
     
     firstUpdated() {
         // document.body.appendChild(renderer.domElement)
-        let canvas = this.shadowRoot.getElementById('canvas')
-        canvas.appendChild(this.renderer.domElement)
+        if ( document && document.readyState === "interactive") {
+            const canvas = this.shadowRoot.getElementById('#bg')
+            canvas.appendChild(this.renderer.domElement)
+            // this.canvas = canvas
+        }
     }
 
     render() {
         // animate()
 
         return html`
-        <section>
-        This canvas should cover everything
         <canvas id="bg"></canvas>
-        </section>
         `
     }
 }
