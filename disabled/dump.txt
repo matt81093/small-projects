@@ -1,0 +1,6 @@
+   "@astrojs/renderer-svelte": "^0.4.0",
+  "@typescript-eslint/eslint-plugin": "^5.13.0",
+  "@typescript-eslint/parser": "^5.13.0",
+  "eslint": "^8.10.0",
+  "three": "^0.138.2",
+  "svelte": "^3.46.4"

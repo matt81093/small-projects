@@ -1,11 +1,6 @@
 ---
-import SvelteComponent from "../components/background/three.svelte";
-
-/*
-(function () {
-	return import.meta.env.SSR ? <div class="spinner"></div> : <SvelteComponent client:idle/>;
-}())
-*/
+// import SvelteComponent from "../components/background/main.svelte"
+import SvelteComponent from "../components/background/index.svelte"
 ---
 <html lang="en">
 
@@ -18,11 +13,10 @@ import SvelteComponent from "../components/background/three.svelte";
 
 <body>
 	<h1>Welcome to <a href="https://astro.build/">Astro</a></h1>
+	<h2>By Bob</h2>
+	<h3>WHY DON'T YOU WORK YOU BASTARD, I'm likely being a moron</h3>
 	<main>
 	<SvelteComponent client:load="svelte"/>
-		<script>
-
-		</script>
 	</main>
 
 </body>

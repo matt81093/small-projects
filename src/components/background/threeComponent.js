@@ -1,107 +1,156 @@
-import * as THREE from "three";
+import * as THREE from 'three'
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 
-const scene = initScene();
-const camera = initCamera();
-const torus = createTorus();
-setCamera(camera);
-addToScene(scene, torus);
-let renderer = null
-console.log('Prep done!')
+const background = {
+	// empty variables?
+	scene: null,
+	camera: null,
+	torus: null,
+	pointLight: null,
+	ambientLight: null,
+	lightHelper: null,
+	renderer: null,
+	controls: null, 
+  
 
-// const renderer = initRenderer(bg)
+	init() {
+		let {
+			scene,
+			camera,
+			torus,
+			pointLight,
+			ambientLight,
+			lightHelper,
 
-function initScene() {
-    return new THREE.Scene();
+			initScene,
+			initCamera,
+			createTorus,
+			createPointLight,
+			createAmbientLight,
+			createPointLightHelper,
+			setCamera,
+			addToScene,
+		} = background
+
+		// init canvas, etc
+		scene = initScene()
+		camera = initCamera()
+		torus = createTorus()
+		pointLight = createPointLight()
+		ambientLight = createAmbientLight()
+		lightHelper = createPointLightHelper(pointLight)
+		setCamera(camera)
+		addToScene(scene, torus, pointLight, ambientLight, lightHelper)
+		console.log('Prep Done!')
+		// animate(background)
+	},
+
+	render(bg) {
+		let {
+			renderer,
+			controls,
+			camera,
+			pointLight,
+			initRenderer,
+			setRenderer,
+			spawnOrbitControls,
+			setLight,
+			resize,
+			animate,
+		} = background
+
+		renderer = initRenderer(bg)
+		controls = spawnOrbitControls(camera, renderer)
+		setRenderer(renderer)
+		setLight(pointLight)
+		resize(renderer, camera)
+		console.log('Done!')
+
+		animate()
+	},
+
+	animate() {
+		let { animate, torus, controls, renderer, scene, camera } = background
+
+		torus.rotation.x += 0.01
+		torus.rotation.y += 0.005
+		torus.rotation.z += 0.01
+
+		controls.update()
+		renderer.render(scene, camera)
+
+		requestAnimationFrame(animate())
+		console.log('Animation!')
+	},
+
+	initScene() {
+		return new THREE.Scene()
+	},
+
+	initCamera() {
+		return new THREE.PerspectiveCamera(
+			75,
+			window.innerWidth / window.innerHeight,
+			0.1,
+			1000
+		)
+	},
+
+	setCamera(camera, valZ = 30) {
+		return camera.position.setZ(valZ)
+	},
+
+	initRenderer(canvas) {
+		return new THREE.WebGL1Renderer({
+			antialias: true,
+			canvas: canvas,
+		})
+	},
+
+	setRenderer(renderer) {
+		renderer.setPixelRatio(window.devicePixelRatio)
+		renderer.setSize(window.innerWidth, window.innerHeight)
+	},
+
+	createTorus() {
+		const geometry = new THREE.TorusGeometry(10, 3, 16, 100)
+		const material = new THREE.MeshStandardMaterial({
+			color: 0xff6347,
+			wireframe: false,
+		})
+		return new THREE.Mesh(geometry, material)
+	}, // This would be better with geometry and material as parameters
+
+	addToScene(scene, ...object) {
+		scene.add(...object)
+	},
+
+	createPointLight() {
+		return new THREE.PointLight(0xffffff)
+	},
+
+	createAmbientLight() {
+		return new THREE.AmbientLight(0xffffff)
+	},
+
+	createPointLightHelper(light) {
+		return new THREE.PointLightHelper(light)
+	},
+
+	setLight(light) {
+		light.position.set(5, 5, 5)
+	},
+
+	resize(renderer, camera) {
+		renderer.setSize(window.innerWidth, window.innerHeight)
+		camera.aspect = window.innerWidth / window.innerHeight
+		camera.updateProjectionMatrix()
+	},
+
+	spawnOrbitControls(camera, renderer) {
+		return new OrbitControls(camera, renderer.domElement)
+	},
 }
+// background.init()
 
-function initCamera() {
-    return new THREE.PerspectiveCamera(
-        75,
-        window.innerWidth / window.innerHeight,
-        0.1,
-        1000
-    );
-}
-
-function setCamera() {
-    return camera.position.setZ(30);
-}
-
-function initRenderer(canvas) {
-    return new THREE.WebGL1Renderer({
-        antialias: true,
-        canvas: canvas
-        // canvas: document.querySelector("#bg"),
-        // canvas: document.getElementById("#bg")
-    });
-}
-
-function setRenderer(renderer) {
-    renderer.setPixelRatio(window.devicePixelRatio);
-    renderer.setSize(window.innerWidth, window.innerHeight);
-}
-
-function createTorus() {
-    const geometry = new THREE.TorusGeometry(10, 3, 16, 100);
-    const material = new THREE.MeshBasicMaterial({
-        color: 0xff6347,
-        wireframe: true,
-    });
-    return new THREE.Mesh(geometry, material);
-} // This would be better with geometry and material as parameters
-
-function addToScene(scene, object) {
-    scene.add(object);
-}
-
-function getCanvas() {
-    return document.getElementById('#bg');
-    // this.shadowRoot.getElementById('#bg')
-}
-
-// function cheekyAnimate(renderer, scene, camera, torus) {
-// }
-
-
-function animate() {
-    requestAnimationFrame(animate);
-
-    torus.rotation.x += 0.01;
-    torus.rotation.y += 0.005;
-    torus.rotation.z += 0.01;
-
-    renderer.render(scene, camera);
-}
-
-function resize(renderer, camera) {
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
-}
-
-export async function setUpScene(bg) { //setUpScene
-    // scene = await initScene();
-    // camera = await initCamera();
-    // torus = await createTorus();
-    // let canvas = getCanvas()
-    renderer = initRenderer(bg)
-    setRenderer(renderer)
-    resize(renderer, camera)
-    animate(renderer, scene, camera, torus) // It really doesn't like how I'm passing variables?
-    console.log("Done!") // Async returns promises and I didn't explicit anything?
-}
-
-/*
-export function createScene(bg) {
-    setUpScene()
-    let renderer = initRenderer(bg)
-    let camera = initCamera()
-    let scene = initScene()
-    let torus = createTorus()
-    setRenderer(renderer)
-    resize(renderer, camera)
-    animate(renderer, scene, camera, torus)
-}
-*/
-
-// window.addEventListener('resize', resize)
+export { background }

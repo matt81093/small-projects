@@ -2,21 +2,22 @@
   "name": "@example/minimal",
   "version": "0.0.1",
   "private": true,
+  "description": "",
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "astro build",
-    "preview": "astro preview"
+    "build": "astro build --verbose",
+    "preview": "astro preview",
+    "debug-type": "astro check --verbose",
+    "reload": "astro --reload",
+    "version": "astro --version"
   },
   "dependencies": {
-    "@astrojs/renderer-lit": "^0.1.2",
-    "@astrojs/renderer-svelte": "^0.1.2",
-    "eslint": "^8.2.0",
-    "lit": "^2.0.2",
-    "three": "^0.134.0"
+    "astro": "^0.23.4"
   },
   "devDependencies": {
-    "astro": "^0.20.12",
-    "svelte": "^3.44.1"
+    "@types/three": "^0.138.0",
+    "svelte-cubed": "^0.2.1",
+    "three": "^0.138.3"
   }
 }
