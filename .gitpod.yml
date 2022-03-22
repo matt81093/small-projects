@@ -8,10 +8,8 @@ ports:
 vscode:
   extensions:
     - svelte.svelte-vscode
-    - snowpackjs.astro
     - oouo-diogo-perdigao.docthis
     - hookyqr.beautify
-    - ms-azuretools.vscode-docker
     - cschleiden.vscode-github-actions
     - github.vscode-pull-request-github
     - eamodio.gitlens
@@ -21,3 +19,4 @@ vscode:
     - gencer.html-slim-scss-css-class-completion
     - jerrygoyal.shortcut-menu-bar
     - dotjoshjohnson.xml
+    - ms-azuretools.vscode-docker

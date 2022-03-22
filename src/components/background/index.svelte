@@ -1,8 +1,8 @@
 <script>
 	import * as THREE from 'three'
 	import * as SC from 'svelte-cubed'
-	import { Mesh, Scene } from 'three'
-	import { x, y } from '../../../dist/assets/vendor.2a26677d'
+	// import { Mesh, Scene } from 'three'
+	// import { x, y } from '../../../dist/assets/vendor.2a26677d'
 
 	$: torus = new THREE.TorusGeometry(10, 3, 16, 100)
 	$: torusMaterial = new THREE.MeshStandardMaterial({

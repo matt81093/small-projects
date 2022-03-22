@@ -13,11 +13,12 @@
     "version": "astro --version"
   },
   "dependencies": {
-    "astro": "^0.23.4"
-  },
-  "devDependencies": {
-    "@types/three": "^0.138.0",
+    "astro": "^0.24.3",
+    "svelte": "^3.46.4",
     "svelte-cubed": "^0.2.1",
     "three": "^0.138.3"
+  },
+  "devDependencies": {
+    "@types/three": "^0.138.0"
   }
 }
